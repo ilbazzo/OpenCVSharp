@@ -3,6 +3,8 @@
 #ifdef ENABLED_CUDA
 
 #include "include_opencv.h"
+#include <opencv2/core/cuda.hpp>
+using namespace cv::cuda;
 
 #pragma region Init and Disposal
 
@@ -206,8 +208,8 @@ CVAPI(void) cuda_GpuMat_locateROI(GpuMat *obj, CvSize *wholeSize, CvPoint *ofs)
     cv::Size _wholeSize;
     cv::Point _ofs;
     obj->locateROI(_wholeSize, _ofs);
-    *wholeSize = (CvSize)_wholeSize;
-    *ofs = (CvPoint)_ofs;
+    *wholeSize = *((CvSize*)&_wholeSize);
+    *ofs = *((CvPoint*)&_ofs);
 }
 
 CVAPI(GpuMat*) cuda_GpuMat_adjustROI(GpuMat *obj, int dtop, int dbottom, int dleft, int dright)

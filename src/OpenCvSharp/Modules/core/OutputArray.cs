@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using OpenCvSharp.Cuda;
 using OpenCvSharp.Internal;
 using OpenCvSharp.Internal.Vectors;
 
@@ -54,7 +55,8 @@ namespace OpenCvSharp
         {
             if (mat == null)
                 throw new ArgumentNullException(nameof(mat));
-            ptr = NativeMethods.core_OutputArray_new_byGpuMat(mat.CvPtr);
+            NativeMethods.HandleException(
+                NativeMethods.core_OutputArray_new_byGpuMat(mat.CvPtr,out ptr));
             GC.KeepAlive(mat);
             obj = mat;
         }

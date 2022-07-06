@@ -8,7 +8,6 @@
 
 #include <opencv2/opencv.hpp>
 
-
 #ifdef _WIN32
 #ifdef _DEBUG
 #include <Windows.h>
@@ -93,6 +92,10 @@ static cv::UMat entity(cv::UMat* obj)
 static cv::SparseMat entity(cv::SparseMat *obj)
 {
     return (obj != nullptr) ? *obj : cv::SparseMat();
+}
+static cv::cuda::GpuMat entity(cv::cuda::GpuMat* obj)
+{
+    return (obj != nullptr) ? *obj : cv::cuda::GpuMat();
 }
 
 template <typename T>

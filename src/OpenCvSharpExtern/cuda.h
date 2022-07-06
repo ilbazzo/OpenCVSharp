@@ -3,6 +3,8 @@
 #ifdef ENABLED_CUDA
 
 #include "include_opencv.h"
+#include <opencv2/core/cuda.hpp>
+using namespace cv::cuda;
 
 #pragma region Device
 

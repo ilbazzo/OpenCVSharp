@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using OpenCvSharp.Cuda;
+using OpenCvSharp.Internal;
 
 namespace OpenCvSharp
 {

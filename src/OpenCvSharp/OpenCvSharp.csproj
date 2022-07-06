@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard2.1;netcoreapp3.1;net48;net6.0;</TargetFrameworks>
+    <TargetFrameworks>net5.0</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AssemblyName>OpenCvSharp</AssemblyName>
@@ -50,15 +50,15 @@
   </ItemGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'net48'">
-    <DefineConstants>$(DefineConstants);DOTNET_FRAMEWORK;</DefineConstants>
+    <DefineConstants>$(DefineConstants);DOTNET_FRAMEWORK;ENABLED_CUDA</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition="$(TargetFramework.Contains('netstandard')) Or $(TargetFramework.Contains('netcoreapp')) ">
-    <DefineConstants>TRACE;DOTNETCORE;WINRT</DefineConstants>
+    <DefineConstants>TRACE;DOTNETCORE;WINRT;ENABLED_CUDA</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition="$(TargetFramework.Contains('net6.0')) ">
-    <DefineConstants>TRACE;DOTNETCORE;</DefineConstants>
+    <DefineConstants>TRACE;DOTNETCORE;ENABLED_CUDA</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release-JP' ">
@@ -67,6 +67,14 @@
 
   <PropertyGroup>
     <NoWarn>1701;1702;CA1303;CA1707;CA1814;CA1401;CA1720;</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net5.0|AnyCPU'">
+    <DefineConstants>$(DefineConstants)TRACE;ENABLED_CUDA</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net5.0|AnyCPU'">
+    <DefineConstants>$(DefineConstants)TRACE;ENABLED_CUDA</DefineConstants>
   </PropertyGroup>
 
 </Project>

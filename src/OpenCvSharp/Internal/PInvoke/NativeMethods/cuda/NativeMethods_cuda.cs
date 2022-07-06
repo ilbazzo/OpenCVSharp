@@ -1,13 +1,14 @@
 ﻿#if ENABLED_CUDA
 
 using System;
+using System.Diagnostics.Contracts;
 using System.Runtime.InteropServices;
 using System.Text;
 using OpenCvSharp.Cuda;
 
 #pragma warning disable 1591
 
-namespace OpenCvSharp
+namespace OpenCvSharp.Internal
 {
     // ReSharper disable InconsistentNaming
 

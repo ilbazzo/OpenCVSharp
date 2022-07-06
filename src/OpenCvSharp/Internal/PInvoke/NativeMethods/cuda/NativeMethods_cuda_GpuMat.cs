@@ -2,10 +2,11 @@
 
 using System;
 using System.Runtime.InteropServices;
+using System.Diagnostics.Contracts;
 
 #pragma warning disable 1591
 
-namespace OpenCvSharp
+namespace OpenCvSharp.Internal
 {
     // ReSharper disable InconsistentNaming
 

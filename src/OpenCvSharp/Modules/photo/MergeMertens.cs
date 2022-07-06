@@ -63,6 +63,30 @@ namespace OpenCvSharp
         }
 
         /// <summary>
+        /// Short version of process, that doesn't take extra arguments.
+        /// </summary>
+        /// <param name="src">vector of input images</param>
+        /// <param name="dst">result image</param>
+        public void ProcessG(IEnumerable<Mat> src, OutputArray dst)
+        {
+            if (src == null)
+                throw new ArgumentNullException(nameof(src));
+            if (dst == null)
+                throw new ArgumentNullException(nameof(dst));
+
+            dst.ThrowIfNotReady();
+
+            var srcArray = src.Select(s => s.CvPtr).ToArray();
+
+            NativeMethods.photo_MergeMertens_processg(ptr, srcArray, srcArray.Length, dst.CvPtr);
+
+            GC.KeepAlive(this);
+            GC.KeepAlive(src);
+            GC.KeepAlive(srcArray);
+            dst.Fix();
+        }
+
+        /// <summary>
         /// Releases managed resources
         /// </summary>
         protected override void DisposeManaged()

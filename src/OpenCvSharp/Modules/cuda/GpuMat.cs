@@ -1,10 +1,10 @@
 ﻿#if ENABLED_CUDA
 
+using OpenCvSharp.Internal;
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
-using OpenCvSharp.Util;
 
 namespace OpenCvSharp.Cuda
 {
@@ -483,7 +483,7 @@ namespace OpenCvSharp.Cuda
                 get
                 {
                     var p = new IntPtr(ptrVal + (step*i0) + (sizeOfT*i1));
-                    return MarshalHelper.PtrToStructure<T>(p);
+                    return Marshal.PtrToStructure<T>(p);
                 }
                 set
                 {

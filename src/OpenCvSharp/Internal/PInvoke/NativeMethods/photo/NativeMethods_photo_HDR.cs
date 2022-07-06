@@ -92,5 +92,8 @@ namespace OpenCvSharp.Internal
 
         [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern IntPtr photo_MergeMertens_process(IntPtr obj, IntPtr[] srcImgs, int srcImgsLength, IntPtr dst);
+
+        [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern IntPtr photo_MergeMertens_processg(IntPtr obj, IntPtr[] srcImgs, int srcImgsLength, IntPtr dst);
     }
 }
