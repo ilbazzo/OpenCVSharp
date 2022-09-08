@@ -7,6 +7,7 @@
 // ReSharper disable CppNonInlineFunctionDefinitionInHeaderFile
 
 #include "include_opencv.h"
+#include <opencv2/dnn/layer.details.hpp>
 
 CVAPI(ExceptionStatus) dnn_Net_new(cv::dnn::Net **returnValue)
 {
@@ -208,5 +209,12 @@ CVAPI(ExceptionStatus) dnn_Net_getPerfProfile(cv::dnn::Net* net, std::vector<dou
     *returnValue = net->getPerfProfile(*timings);
     END_WRAP
 }
+
+//CVAPI(ExceptionStatus) dnn_Net_registerLayerClass()
+//{
+//    BEGIN_WRAP
+//       CV_DNN_REGISTER_LAYER_CLASS()
+//    END_WRAP
+//}
 
 #endif // !#ifndef _WINRT_DLL

@@ -291,18 +291,22 @@ void MergeMertens(std::vector<cv::cuda::GpuMat> images, cv::OutputArray dst, flo
         for (int c = 0; c < channels; c++) 
         {
             cv::cuda::subtract(splitted[c],mean,deviation);
-            cv::cuda::pow(deviation, 2.0f, deviation);
+            // cv::cuda::pow(deviation, 2.0f, deviation);
+            cv::cuda::multiply(deviation, deviation, deviation);
             cv::cuda::add(saturation,deviation,saturation);
         }
         cv::cuda::sqrt(saturation, saturation);
 
         wellexp = cv::cuda::GpuMat(size, CV_32F,cv::Scalar(1));
         cv::cuda::GpuMat expo = cv::cuda::GpuMat(size, CV_32F);
+        float a = -1.0f / 0.08f;
         for (int c = 0; c < channels; c++) 
         {
             cv::cuda::subtract(splitted[c],0.5f,expo);
-            cv::cuda::pow(expo, 2.0f, expo);
-            cv::cuda::divide(expo,-0.08f,expo);
+            /*cv::cuda::pow(expo, 2.0, expo);
+            cv::cuda::divide(expo, -0.08, expo);*/
+            cv::cuda::multiply(expo, expo, expo);
+            cv::cuda::multiply(expo,a,expo);
             cv::cuda::exp(expo, expo);
             cv::cuda::multiply(wellexp,expo,wellexp);
         }
