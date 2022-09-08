@@ -1,4 +1,4 @@
-name: Windows Server 2019
+name: Windows Server 2022
 
 on:
   pull_request:
@@ -8,7 +8,7 @@ on:
       - master
 
 env:
-  OPENCV_VERSION: 4.5.5
+  OPENCV_VERSION: 4.6.0
 
 jobs:
   build:
