@@ -22,7 +22,6 @@ CVAPI(ExceptionStatus) core_copyMakeBorder(
     cv::copyMakeBorder(*src, *dst, top, bottom, left, right, borderType, cpp(value));
     END_WRAP
 }
-
 CVAPI(ExceptionStatus) core_add(
     cv::_InputArray *src1, cv::_InputArray *src2, cv::_OutputArray *dst, cv::_InputArray *mask, int dtype)
 {
@@ -195,6 +194,20 @@ CVAPI(ExceptionStatus) core_normalize(
     BEGIN_WRAP
     cv::InputArray maskVal = entity(mask);
     cv::normalize(*src, *dst, alpha, beta, normType, dtype, maskVal);
+    END_WRAP
+}
+
+CVAPI(ExceptionStatus) core_reduceArgMax(cv::_InputArray* src, cv::_OutputArray* dst, int axis, bool lastIndex)
+{
+    BEGIN_WRAP
+    cv::reduceArgMax(*src, *dst, axis, lastIndex);
+    END_WRAP
+}
+
+CVAPI(ExceptionStatus) core_reduceArgMin(cv::_InputArray* src, cv::_OutputArray* dst, int axis, bool lastIndex)
+{
+    BEGIN_WRAP
+    cv::reduceArgMin(*src, *dst, axis, lastIndex);
     END_WRAP
 }
 

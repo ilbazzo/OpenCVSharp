@@ -39,6 +39,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenCvSharp.DebuggerVisuali
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenCvSharp.Tests.Windows", "test\OpenCvSharp.Tests.Windows\OpenCvSharp.Tests.Windows.csproj", "{36F6A125-3633-441E-9794-97EB91E50F20}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkTest", "LinkTest\LinkTest.csproj", "{044CF029-B265-4837-8EF3-D284213542F9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -214,6 +216,22 @@ Global
 		{36F6A125-3633-441E-9794-97EB91E50F20}.Release|x64.Build.0 = Release|Any CPU
 		{36F6A125-3633-441E-9794-97EB91E50F20}.Release|x86.ActiveCfg = Release|Any CPU
 		{36F6A125-3633-441E-9794-97EB91E50F20}.Release|x86.Build.0 = Release|Any CPU
+		{044CF029-B265-4837-8EF3-D284213542F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{044CF029-B265-4837-8EF3-D284213542F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{044CF029-B265-4837-8EF3-D284213542F9}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{044CF029-B265-4837-8EF3-D284213542F9}.Debug|ARM.Build.0 = Debug|Any CPU
+		{044CF029-B265-4837-8EF3-D284213542F9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{044CF029-B265-4837-8EF3-D284213542F9}.Debug|x64.Build.0 = Debug|Any CPU
+		{044CF029-B265-4837-8EF3-D284213542F9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{044CF029-B265-4837-8EF3-D284213542F9}.Debug|x86.Build.0 = Debug|Any CPU
+		{044CF029-B265-4837-8EF3-D284213542F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{044CF029-B265-4837-8EF3-D284213542F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{044CF029-B265-4837-8EF3-D284213542F9}.Release|ARM.ActiveCfg = Release|Any CPU
+		{044CF029-B265-4837-8EF3-D284213542F9}.Release|ARM.Build.0 = Release|Any CPU
+		{044CF029-B265-4837-8EF3-D284213542F9}.Release|x64.ActiveCfg = Release|Any CPU
+		{044CF029-B265-4837-8EF3-D284213542F9}.Release|x64.Build.0 = Release|Any CPU
+		{044CF029-B265-4837-8EF3-D284213542F9}.Release|x86.ActiveCfg = Release|Any CPU
+		{044CF029-B265-4837-8EF3-D284213542F9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

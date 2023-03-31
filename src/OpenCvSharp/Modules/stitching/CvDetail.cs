@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using OpenCvSharp.Internal;
 using OpenCvSharp.Internal.Vectors;
 
@@ -25,9 +24,9 @@ public static class CvDetail
         IEnumerable<Mat> images,
         IEnumerable<Mat>? masks = null)
     {
-        if (featuresFinder == null)
+        if (featuresFinder is null)
             throw new ArgumentNullException(nameof(featuresFinder));
-        if (images == null)
+        if (images is null)
             throw new ArgumentNullException(nameof(images));
         featuresFinder.ThrowIfDisposed();
 
@@ -37,7 +36,7 @@ public static class CvDetail
             
         var imagesPointers = imagesArray.Select(i => i.CvPtr).ToArray();
         var masksPointers = masks?.Select(i => i.CvPtr).ToArray();
-        if (masksPointers != null && imagesPointers.Length != masksPointers.Length)
+        if (masksPointers is not null && imagesPointers.Length != masksPointers.Length)
             throw new ArgumentException("size of images != size of masks");
 
         using var wImageFeaturesVec = new VectorOfImageFeatures();
@@ -68,9 +67,9 @@ public static class CvDetail
         InputArray image,
         InputArray? mask = null)
     {
-        if (featuresFinder == null)
+        if (featuresFinder is null)
             throw new ArgumentNullException(nameof(featuresFinder));
-        if (image == null)
+        if (image is null)
             throw new ArgumentNullException(nameof(image));
         featuresFinder.ThrowIfDisposed();
         image.ThrowIfDisposed();

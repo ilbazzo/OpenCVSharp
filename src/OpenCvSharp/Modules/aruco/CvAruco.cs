@@ -33,14 +33,11 @@ public static class CvAruco
         DetectorParameters parameters, 
         out Point2f[][] rejectedImgPoints)
     {
-        if (image == null)
+        if (image is null)
             throw new ArgumentNullException(nameof(image));
-        if (dictionary == null)
+        if (dictionary is null)
             throw new ArgumentNullException(nameof(dictionary));
-        if (parameters == null) 
-            throw new ArgumentNullException(nameof(parameters));
-        if (dictionary.ObjectPtr == null)
-            throw new ArgumentException($"{nameof(dictionary)} is disposed", nameof(dictionary));
+        dictionary.ThrowIfDisposed();
 
         using var cornersVec = new VectorOfVectorPoint2f();
         using var idsVec = new VectorOfInt32();
@@ -48,7 +45,7 @@ public static class CvAruco
 
         NativeMethods.HandleException(
             NativeMethods.aruco_detectMarkers(
-                image.CvPtr, dictionary.ObjectPtr.CvPtr, cornersVec.CvPtr, idsVec.CvPtr, ref parameters.Native,
+                image.CvPtr, dictionary.CvPtr, cornersVec.CvPtr, idsVec.CvPtr, ref parameters,
                 rejectedImgPointsVec.CvPtr));
 
         corners = cornersVec.ToArray();
@@ -86,15 +83,15 @@ public static class CvAruco
         OutputArray tvec,
         OutputArray? objPoints = null)
     {
-        if (corners == null)
+        if (corners is null)
             throw new ArgumentNullException(nameof(corners));
-        if (cameraMatrix == null)
+        if (cameraMatrix is null)
             throw new ArgumentNullException(nameof(cameraMatrix));
-        if (distortionCoefficients == null)
+        if (distortionCoefficients is null)
             throw new ArgumentNullException(nameof(distortionCoefficients));
-        if (rvec == null)
+        if (rvec is null)
             throw new ArgumentNullException(nameof(rvec));
-        if (tvec == null)
+        if (tvec is null)
             throw new ArgumentNullException(nameof(tvec));
 
         cameraMatrix.ThrowIfDisposed();
@@ -141,13 +138,13 @@ public static class CvAruco
     ///  are calculated based on this one to improve visualization.</param>
     public static void DrawDetectedMarkers(InputArray image, Point2f[][] corners, IEnumerable<int>? ids, Scalar borderColor)
     {
-        if (image == null)
+        if (image is null)
             throw new ArgumentNullException(nameof(image));
-        if (corners == null)
+        if (corners is null)
             throw new ArgumentNullException(nameof(corners));
 
         using var cornersAddress = new ArrayAddress2<Point2f>(corners);
-        if (ids == null)
+        if (ids is null)
         {
             NativeMethods.HandleException(
                 NativeMethods.aruco_drawDetectedMarkers(
@@ -164,33 +161,7 @@ public static class CvAruco
         }
         GC.KeepAlive(image);
     }
-
-    /// <summary>
-    /// Draw a canonical marker image
-    /// </summary>
-    /// <param name="dictionary">dictionary of markers indicating the type of markers</param>
-    /// <param name="id">identifier of the marker that will be returned. It has to be a valid id in the specified dictionary.</param>
-    /// <param name="sidePixels">size of the image in pixels</param>
-    /// <param name="mat">output image with the marker</param>
-    /// <param name="borderBits">width of the marker border.</param>
-    public static void DrawMarker(Dictionary dictionary, int id, int sidePixels, OutputArray mat, int borderBits = 1)
-    {
-        if (dictionary == null)
-            throw new ArgumentNullException(nameof(dictionary));
-        if (dictionary.ObjectPtr == null)
-            throw new ArgumentException($"{nameof(dictionary)} is disposed", nameof(dictionary));
-        if (mat == null)
-            throw new ArgumentNullException(nameof(mat));
-        dictionary.ThrowIfDisposed();
-        mat.ThrowIfNotReady();
-
-        NativeMethods.HandleException(
-            NativeMethods.aruco_drawMarker(dictionary.ObjectPtr.CvPtr, id, sidePixels, mat.CvPtr, borderBits));
-        mat.Fix();
-        GC.KeepAlive(dictionary);
-        GC.KeepAlive(mat);
-    }
-
+    
     /// <summary>
     /// Returns one of the predefined dictionaries defined in PREDEFINED_DICTIONARY_NAME
     /// </summary>
@@ -218,16 +189,16 @@ public static class CvAruco
         float squareMarkerLengthRate, out Point2f[][] diamondCorners, out Vec4i[] diamondIds,
         InputArray? cameraMatrix = null, InputArray? distCoeffs = null)
     {
-        if (image == null)
+        if (image is null)
             throw new ArgumentNullException(nameof(image));
-        if (markerCorners == null)
+        if (markerCorners is null)
             throw new ArgumentNullException(nameof(markerCorners));
-        if (markerIds == null)
+        if (markerIds is null)
             throw new ArgumentNullException(nameof(markerIds));
 
-        if (cameraMatrix == null && distCoeffs != null)
+        if (cameraMatrix is null && distCoeffs is not null)
             throw new ArgumentNullException(nameof(cameraMatrix));
-        if (cameraMatrix != null && distCoeffs == null)
+        if (cameraMatrix is not null && distCoeffs is null)
             throw new ArgumentNullException(nameof(distCoeffs));
 
         image.ThrowIfDisposed();
@@ -252,9 +223,9 @@ public static class CvAruco
         diamondIds = diamondIdsVec.ToArray();
 
         GC.KeepAlive(image);
-        if (cameraMatrix != null)
+        if (cameraMatrix is not null)
             GC.KeepAlive(cameraMatrix);
-        if (distCoeffs != null)
+        if (distCoeffs is not null)
             GC.KeepAlive(distCoeffs);
     }
 
@@ -279,14 +250,14 @@ public static class CvAruco
     public static void DrawDetectedDiamonds(InputArray image,
         Point2f[][] diamondCorners, IEnumerable<Vec4i>? diamondIds, Scalar borderColor)
     {
-        if (image == null)
+        if (image is null)
             throw new ArgumentNullException(nameof(image));
-        if (diamondCorners == null)
+        if (diamondCorners is null)
             throw new ArgumentNullException(nameof(diamondCorners));
 
         using var cornersAddress = new ArrayAddress2<Point2f>(diamondCorners);
 
-        if (diamondIds == null)
+        if (diamondIds is null)
         {
             NativeMethods.HandleException(
                 NativeMethods.aruco_drawDetectedDiamonds(image.CvPtr,

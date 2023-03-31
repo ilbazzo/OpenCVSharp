@@ -232,8 +232,9 @@ public class VideoCapture : DisposableCvObject
     /// </summary>
     protected override void DisposeUnmanaged()
     {
-        NativeMethods.HandleException(
-            NativeMethods.videoio_VideoCapture_delete(ptr));
+        if (ptr != IntPtr.Zero)
+            NativeMethods.HandleException(
+                NativeMethods.videoio_VideoCapture_delete(ptr));
         base.DisposeUnmanaged();
     }
 
@@ -1156,7 +1157,7 @@ public class VideoCapture : DisposableCvObject
     public bool Retrieve(OutputArray image, int flag = 0)
     {
         ThrowIfDisposed();
-        if (image == null)
+        if (image is null)
             throw new ArgumentNullException(nameof(image));
         image.ThrowIfNotReady();
 
@@ -1181,7 +1182,7 @@ public class VideoCapture : DisposableCvObject
     public bool Retrieve(OutputArray image, CameraChannels streamIdx)
     {
         ThrowIfDisposed();
-        if (image == null)
+        if (image is null)
             throw new ArgumentNullException(nameof(image));
         image.ThrowIfNotReady();
 
@@ -1206,7 +1207,7 @@ public class VideoCapture : DisposableCvObject
     public bool Retrieve(Mat image, int flag = 0)
     {
         ThrowIfDisposed();
-        if (image == null)
+        if (image is null)
             throw new ArgumentNullException(nameof(image));
         image.ThrowIfDisposed();
 
@@ -1231,7 +1232,7 @@ public class VideoCapture : DisposableCvObject
     public bool Retrieve(Mat image, CameraChannels streamIdx)
     {
         ThrowIfDisposed();
-        if (image == null)
+        if (image is null)
             throw new ArgumentNullException(nameof(image));
         image.ThrowIfDisposed();
 
@@ -1274,7 +1275,7 @@ public class VideoCapture : DisposableCvObject
     public bool Read(OutputArray image)
     {
         ThrowIfDisposed();
-        if(image == null)
+        if(image is null)
             throw new ArgumentNullException(nameof(image));
         image.ThrowIfNotReady();
 
@@ -1298,7 +1299,7 @@ public class VideoCapture : DisposableCvObject
     public bool Read(Mat image)
     {
         ThrowIfDisposed();
-        if(image == null)
+        if(image is null)
             throw new ArgumentNullException(nameof(image));
         image.ThrowIfDisposed();
 
@@ -1427,12 +1428,12 @@ public class VideoCapture : DisposableCvObject
         out int[] readyIndex, 
         long timeoutNs = 0)
     {
-        if (streams == null) 
+        if (streams is null) 
             throw new ArgumentNullException(nameof(streams));
 
         var streamPtrs = streams.Select(s =>
         {
-            if (s == null)
+            if (s is null)
                 throw new ArgumentException($"{nameof(streams)} contains null", nameof(streams));
             s.ThrowIfDisposed();
             return s.CvPtr;

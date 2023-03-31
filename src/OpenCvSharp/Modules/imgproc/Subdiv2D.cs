@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using OpenCvSharp.Internal;
 using OpenCvSharp.Internal.Util;
 using OpenCvSharp.Internal.Vectors;
@@ -118,7 +117,7 @@ public class Subdiv2D : DisposableCvObject
     public void Insert(IEnumerable<Point2f> ptVec)
     {
         ThrowIfDisposed();
-        if (ptVec == null)
+        if (ptVec is null)
             throw new ArgumentNullException(nameof(ptVec));
 
         var ptVecArray = ptVec.CastOrToArray();

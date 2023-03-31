@@ -56,7 +56,7 @@ public class InputArray : DisposableCvObject
     internal InputArray(Mat? mat)
     {
         // ReSharper disable once ConvertIfStatementToConditionalTernaryExpression
-        if (mat == null)
+        if (mat is null)
             ptr = IntPtr.Zero;
         else
             NativeMethods.HandleException(
@@ -74,7 +74,7 @@ public class InputArray : DisposableCvObject
     internal InputArray(UMat? mat)
     {
         // ReSharper disable once ConvertIfStatementToConditionalTernaryExpression
-        if (mat == null)
+        if (mat is null)
             ptr = IntPtr.Zero;
         else
             NativeMethods.HandleException(
@@ -92,7 +92,7 @@ public class InputArray : DisposableCvObject
     internal InputArray(MatExpr? expr)
     {
         // ReSharper disable once ConvertIfStatementToConditionalTernaryExpression
-        if (expr == null)
+        if (expr is null)
             ptr = IntPtr.Zero;
         else
             NativeMethods.HandleException(
@@ -131,7 +131,7 @@ public class InputArray : DisposableCvObject
     /// <param name="vec"></param>
     internal InputArray(byte[] vec)
     {
-        if (vec == null) 
+        if (vec is null) 
             throw new ArgumentNullException(nameof(vec));
         if (vec.Length == 0) 
             throw new ArgumentException("Empty array.", nameof(vec));
@@ -150,7 +150,7 @@ public class InputArray : DisposableCvObject
     /// <param name="vec"></param>
     internal InputArray(short[] vec)
     {
-        if (vec == null) 
+        if (vec is null) 
             throw new ArgumentNullException(nameof(vec));
         if (vec.Length == 0) 
             throw new ArgumentException("Empty array.", nameof(vec));
@@ -169,7 +169,7 @@ public class InputArray : DisposableCvObject
     /// <param name="vec"></param>
     internal InputArray(ushort[] vec)
     {
-        if (vec == null) 
+        if (vec is null) 
             throw new ArgumentNullException(nameof(vec));
         if (vec.Length == 0) 
             throw new ArgumentException("Empty array.", nameof(vec));
@@ -188,7 +188,7 @@ public class InputArray : DisposableCvObject
     /// <param name="vec"></param>
     internal InputArray(int[] vec)
     {
-        if (vec == null) 
+        if (vec is null) 
             throw new ArgumentNullException(nameof(vec));
         if (vec.Length == 0) 
             throw new ArgumentException("Empty array.", nameof(vec));
@@ -207,7 +207,7 @@ public class InputArray : DisposableCvObject
     /// <param name="vec"></param>
     internal InputArray(float[] vec)
     {
-        if (vec == null) 
+        if (vec is null) 
             throw new ArgumentNullException(nameof(vec));
         if (vec.Length == 0) 
             throw new ArgumentException("Empty array.", nameof(vec));
@@ -226,7 +226,7 @@ public class InputArray : DisposableCvObject
     /// <param name="vec"></param>
     internal InputArray(double[] vec)
     {
-        if (vec == null) 
+        if (vec is null) 
             throw new ArgumentNullException(nameof(vec));
         if (vec.Length == 0) 
             throw new ArgumentException("Empty array.", nameof(vec));
@@ -245,7 +245,7 @@ public class InputArray : DisposableCvObject
     /// <param name="mat"></param>
     internal InputArray(IEnumerable<Mat> mat)
     {
-        if (mat == null)
+        if (mat is null)
             throw new ArgumentNullException(nameof(mat));
 
         using (var matVector = new VectorOfMat(mat))
@@ -378,7 +378,7 @@ public class InputArray : DisposableCvObject
     public static InputArray Create<T>(IEnumerable<T> enumerable)
         where T : struct
     {
-        if (enumerable == null)
+        if (enumerable is null)
             throw new ArgumentNullException(nameof(enumerable));
         var list = new List<T>(enumerable);
         return Create(list.ToArray());
@@ -393,7 +393,7 @@ public class InputArray : DisposableCvObject
     public static InputArray Create<T>(IEnumerable<T> enumerable, MatType type)
         where T : struct
     {
-        if (enumerable == null)
+        if (enumerable is null)
             throw new ArgumentNullException(nameof(enumerable));
         var list = new List<T>(enumerable);
         return Create(list.ToArray(), type);
@@ -420,7 +420,7 @@ public class InputArray : DisposableCvObject
     public static InputArray Create<T>(T[] array, MatType type)
         where T : struct
     {
-        if (array == null)
+        if (array is null)
             throw new ArgumentNullException(nameof(array));
         if (array.Length == 0)
             throw new ArgumentException("array.Length == 0");
@@ -451,7 +451,7 @@ public class InputArray : DisposableCvObject
     public static InputArray Create<T>(T[,] array, MatType type)
         where T : struct
     {
-        if (array == null)
+        if (array is null)
             throw new ArgumentNullException(nameof(array));
         var rows = array.GetLength(0);
         var cols = array.GetLength(1);
@@ -470,7 +470,7 @@ public class InputArray : DisposableCvObject
     /// <returns></returns>
     public static InputArray Create(IVec vec)
     {
-        if (vec == null)
+        if (vec is null)
             throw new ArgumentNullException(nameof(vec));
 
         return vec switch
@@ -885,7 +885,7 @@ public class InputArray : DisposableCvObject
     /// <returns></returns>
     public bool SameSize(InputArray arr)
     {
-        if (arr == null)
+        if (arr is null)
             throw new ArgumentNullException(nameof(arr));
         arr.ThrowIfDisposed();
         ThrowIfDisposed();
@@ -1000,7 +1000,7 @@ public class InputArray : DisposableCvObject
     /// <param name="arr"></param>
     public void CopyTo(OutputArray arr)
     {
-        if (arr == null)
+        if (arr is null)
             throw new ArgumentNullException(nameof(arr));
         arr.ThrowIfNotReady();
         ThrowIfDisposed();
@@ -1019,9 +1019,9 @@ public class InputArray : DisposableCvObject
     /// <param name="mask"></param>
     public void CopyTo(OutputArray arr, InputArray mask)
     {
-        if (arr == null)
+        if (arr is null)
             throw new ArgumentNullException(nameof(arr));
-        if (mask == null)
+        if (mask is null)
             throw new ArgumentNullException(nameof(mask));
         arr.ThrowIfNotReady();
         mask.ThrowIfDisposed();
