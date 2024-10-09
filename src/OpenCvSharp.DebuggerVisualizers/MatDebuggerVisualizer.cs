@@ -8,10 +8,14 @@ namespace OpenCvSharp.DebuggerVisualizers
     /// </summary>
     public class MatDebuggerVisualizer : DialogDebuggerVisualizer
     {
+        public MatDebuggerVisualizer() : base(FormatterPolicy.NewtonsoftJson)
+        { 
+        }
+
         protected override void Show(IDialogVisualizerService windowService, IVisualizerObjectProvider objectProvider)
         {
-            // MatProxyが送られてくるはず
-            using (var proxy = objectProvider.GetObject() as MatProxy)
+            IVisualizerObjectProvider3 objectProvider3 = objectProvider as IVisualizerObjectProvider3;
+            using (var proxy = new MatProxy(objectProvider3.GetData()))
             {
                 if (proxy is null)
                 {

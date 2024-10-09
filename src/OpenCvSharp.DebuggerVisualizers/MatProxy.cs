@@ -18,6 +18,13 @@ namespace OpenCvSharp.DebuggerVisualizers
             ImageData = image.ToBytes(".png");
         }
 
+        public MatProxy(Stream stream)
+        {
+            var memStream = stream as MemoryStream;
+            ImageData= memStream.ToArray();
+            // ImageData = image.ToBytes(".png");
+        }
+
         public void Dispose()
         {
             ImageData = null;

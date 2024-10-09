@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using OpenCvSharp;
 
 namespace OpenCvSharp.DebuggerVisualizers.Tester
 {
@@ -17,9 +18,25 @@ namespace OpenCvSharp.DebuggerVisualizers.Tester
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 
-			var img = @"_data\image\calibration\00.jpg";
-			var mainForm = new ImageViewer(img);
-			Application.Run(mainForm);
+			var img = new OpenCvSharp.Mat(@"_data\image\calibration\00.jpg");
+            var src = new MatProxy(img);
+
+            using (var proxy = new MatProxy(objectProvider3.GetData()))
+            {
+                if (proxy is null)
+                {
+                    throw new ArgumentException();
+                }
+                // Formに表示
+                using (var form = new ImageViewer(proxy))
+                {
+                    Application.Run(form);
+                    // windowService.ShowDialog(form);
+                }
+            }
+
+   //         var mainForm = new ImageViewer(img);
+			//Application.Run(mainForm);
 		}
 	}
 }
